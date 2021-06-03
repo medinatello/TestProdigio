@@ -1,0 +1,30 @@
+{
+	"info": {
+		"_postman_id": "8a14b3bf-6ba7-4760-ae01-975adf9cadbf",
+		"name": "Api Prodigio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/ping/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ping",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
