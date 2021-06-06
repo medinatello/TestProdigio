@@ -12,6 +12,7 @@ task(runMain, dependsOn: 'classes', type: JavaExec) {
 group = 'com.medinatello'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+description = 'Sistema de test'
 
 repositories {
     mavenCentral()
@@ -29,6 +30,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.jetbrains:annotations:20.1.0'
     implementation 'org.jetbrains:annotations:20.1.0'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.9'
 
     runtimeOnly 'com.h2database:h2'
 

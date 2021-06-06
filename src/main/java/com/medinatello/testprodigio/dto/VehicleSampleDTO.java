@@ -1,11 +1,18 @@
 package com.medinatello.testprodigio.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Calendar;
 
+@XmlRootElement(name = "person")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class VehicleSampleDTO {
 
     private Long id;
-
+    @NotNull
     private Integer fips;
     private String country;
     private String state;
