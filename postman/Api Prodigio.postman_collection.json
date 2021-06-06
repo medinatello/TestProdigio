@@ -25,6 +25,174 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "getAll",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/vehiclesample/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vehiclesample",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAll country",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/vehiclesample/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vehiclesample",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/vehiclesample/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vehiclesample",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/vehiclesample/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vehiclesample",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fips\": 1001,\n    \"country\": \"Venezuela\",\n    \"state\": \"Vargas\",\n    \"date\": \"2021-05-31\",\n    \"countyVmt\": 3550000,\n    \"vmt\": 3571446,\n    \"baselineJanVmt\": 1234,\n    \"percentChangeFromJan\": -0.6,\n    \"mean7CountyVmt\": 2790000,\n    \"mean7PercentChangeFromJan\": -21.88,\n    \"dateAtLow\": \"2020-04-12\",\n    \"mean7CountyVmtAtLow\": 1542857.14,\n    \"percentChangeFromLow\": 80.83\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/vehiclesample/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vehiclesample",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 11,\n    \"fips\": 1001,\n    \"country\": \"Venezuela\",\n    \"state\": \"Aragua\",\n    \"date\": \"2021-05-31\",\n    \"countyVmt\": 3550000,\n    \"vmt\": 3571446,\n    \"baselineJanVmt\": 1234,\n    \"percentChangeFromJan\": -0.6,\n    \"mean7CountyVmt\": 2790000,\n    \"mean7PercentChangeFromJan\": -21.88,\n    \"dateAtLow\": \"2020-04-12\",\n    \"mean7CountyVmtAtLow\": 1542857.14,\n    \"percentChangeFromLow\": 80.83\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/vehiclesample/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vehiclesample",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VehicleService {
@@ -19,8 +20,13 @@ public class VehicleService {
     @Autowired
     private VehicleSampleRepo vehicleSampleRepo;
 
-    public List<VehicleSampleDTO> getVehicleSample(){
-        var vehicleSample =  vehicleSampleRepo.getAll();
+    public List<VehicleSampleDTO> getAllVehicleSamples(String country){
+        List<VehicleSample> vehicleSample = null;
+        if(country == null || country == ""){
+            vehicleSample =  vehicleSampleRepo.getAll();
+        }else{
+            vehicleSample =  vehicleSampleRepo.getAll(country);
+        }
         if (vehicleSample == null){
             return null;
         }
@@ -30,9 +36,74 @@ public class VehicleService {
         return   vehicleSampleDTO;
     }
 
+    public VehicleSampleDTO getVehicleSamples(Long id){
+        var vehicleSample =  vehicleSampleRepo.getById(id);
+        if (vehicleSample == null){
+            return null;
+        }
+        var output = entityDto(vehicleSample);
+
+        return   output;
+    }
+
+    public VehicleSampleDTO create(VehicleSampleDTO value){
+        VehicleSampleDTO output = null;
+        try{
+
+            var entity = vehicleSampleRepo.update(DtoEntity(value));
+            if(entity == null){
+                return null;
+            }
+            output = entityDto(entity);
+
+        }catch (Exception e){
+            logger.error("Error tranformando datos en la creación", e);
+            output = null;
+        }
+
+        return output;
+    }
+
+    public VehicleSampleDTO update(VehicleSampleDTO value){
+        VehicleSampleDTO output = null;
+        try{
+
+            var entity = vehicleSampleRepo.update(DtoEntity(value));
+            if(entity == null){
+                return null;
+            }
+            output = entityDto(entity);
+
+        }catch (Exception e){
+            logger.error("Error tranformando datos en la actualizando", e);
+            output = null;
+        }
+
+        return output;
+    }
 
 
+    public Optional<Boolean> delete(Long id){
+        Optional<Boolean>  output = null;
+        try{
 
+            var entity = vehicleSampleRepo.getById(id);
+            if(entity == null){
+                return Optional.empty();
+            }
+            var result = vehicleSampleRepo.delete(entity);
+            if(result == null){
+                return Optional.of(false);
+            }
+            output = Optional.of(true);
+
+        }catch (Exception e){
+            logger.error("Error tranformando datos en la actualizando", e);
+            output = Optional.empty();
+        }
+
+        return output;
+    }
 
 
     private VehicleSampleDTO entityDto (@org.jetbrains.annotations.NotNull VehicleSample value){
