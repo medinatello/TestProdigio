@@ -1,21 +1,44 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.0'
+    id 'org.springframework.boot' version '2.4.5'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
 
+task(runMain, dependsOn: 'classes', type: JavaExec) {
+    main = 'com.medinatello.testprodigio.TestProdigioApplication'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
 group = 'com.medinatello'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0.0'
 sourceCompatibility = '11'
+description = 'Sistema de test'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-devtools'
+    implementation 'javax.xml.bind:jaxb-api'
+    implementation 'org.glassfish.jaxb:jaxb-runtime'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.8'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.9'
+
+    runtimeOnly 'com.h2database:h2'
+
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
 }
 
 test {
