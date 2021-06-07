@@ -10,7 +10,7 @@ task(runMain, dependsOn: 'classes', type: JavaExec) {
 }
 
 group = 'com.medinatello'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0.0'
 sourceCompatibility = '11'
 description = 'Sistema de test'
 
