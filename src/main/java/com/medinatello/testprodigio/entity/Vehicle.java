@@ -1,23 +1,27 @@
-package com.medinatello.testprodigio.dto;
+package com.medinatello.testprodigio.entity;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Calendar;
 
-@XmlRootElement(name = "person")
-@XmlAccessorType(XmlAccessType.FIELD)
-public class VehicleSampleDTO {
-
+@Entity(name = "vehicle")
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class Vehicle implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
-    private Integer fips;
-    private String country;
-    private String state;
+
+
+    private Integer countyFips;
+    private String countyName;
+    private String stateName;
     private Calendar date;
-    private Integer vmt;
+    private Integer countyVmt;
     private Integer baselineJanVmt;
     private Long percentChangeFromJan;
     private Long mean7CountyVmt;
@@ -34,28 +38,28 @@ public class VehicleSampleDTO {
         this.id = id;
     }
 
-    public Integer getFips() {
-        return fips;
+    public Integer getCountyFips() {
+        return countyFips;
     }
 
-    public void setFips(Integer fips) {
-        this.fips = fips;
+    public void setCountyFips(Integer countyFips) {
+        this.countyFips = countyFips;
     }
 
-    public String getCountry() {
-        return country;
+    public String getCountyName() {
+        return countyName;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCountyName(String countyName) {
+        this.countyName = countyName;
     }
 
-    public String getState() {
-        return state;
+    public String getStateName() {
+        return stateName;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
     }
 
     public Calendar getDate() {
@@ -66,12 +70,12 @@ public class VehicleSampleDTO {
         this.date = date;
     }
 
-    public Integer getVmt() {
-        return vmt;
+    public Integer getCountyVmt() {
+        return countyVmt;
     }
 
-    public void setVmt(Integer vmt) {
-        this.vmt = vmt;
+    public void setCountyVmt(Integer countyVmt) {
+        this.countyVmt = countyVmt;
     }
 
     public Integer getBaselineJanVmt() {

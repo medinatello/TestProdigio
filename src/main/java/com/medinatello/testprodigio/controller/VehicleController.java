@@ -1,6 +1,6 @@
 package com.medinatello.testprodigio.controller;
 
-import com.medinatello.testprodigio.dto.VehicleSampleDTO;
+import com.medinatello.testprodigio.dto.VehicleDTO;
 import com.medinatello.testprodigio.service.VehicleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -23,26 +23,26 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/api/vehiclesample")
+@RequestMapping("/api/vehicle")
 @CrossOrigin(origins = "*")
-public class VehicleSampleController {
+public class VehicleController {
 
-    private Logger logger = LoggerFactory.getLogger(VehicleSampleController.class);
+    private Logger logger = LoggerFactory.getLogger(VehicleController.class);
 
 
     @Autowired
     private VehicleService vehicleService;
 
 
-    @Operation(summary = "Lista de Vehiculos")
+    @Operation(summary = "Lista de Vehiculos con millas")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Encontrado lista de vehiculos", content = {@Content(mediaType =  "application/json", schema  = @Schema(implementation = VehicleSampleDTO.class))}),
-            @ApiResponse(responseCode = "500", description = "Error procesando datos", content = @Content),
+            @ApiResponse(responseCode = "200", description = "Encontrado lista de vehiculos", content = {@Content(mediaType =  "application/json", schema  = @Schema(implementation = VehicleDTO.class))}),
+            @ApiResponse(responseCode = "500", description = "Error buscando los vehiculos", content = @Content),
     })
     @GetMapping(value = "/",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<List<VehicleSampleDTO>> getAll(
+    public ResponseEntity<List<VehicleDTO>> getAll(
             @Parameter(description = "Pais a filtrar", name = "county", required = false) @RequestParam(required = false) final Optional<String> country) {
         logger.info("Services getAll");
         String _country = null;
@@ -52,7 +52,7 @@ public class VehicleSampleController {
         }
 
         HttpStatus code = HttpStatus.OK;
-        List<VehicleSampleDTO> output = new ArrayList<>();
+        List<VehicleDTO> output = new ArrayList<>();
 
         try{
             output = vehicleService.getAllVehicleSamples(_country);
@@ -69,9 +69,9 @@ public class VehicleSampleController {
         return new ResponseEntity<>(output, code);
     }
 
-    @Operation(summary = "Datos de Vehiculo")
+    @Operation(summary = "Datos del Vehiculo")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Encontrado vehiculos", content = {@Content(mediaType =  "application/json", schema  = @Schema(implementation = VehicleSampleDTO.class))}),
+            @ApiResponse(responseCode = "200", description = "Encontrado vehiculos", content = {@Content(mediaType =  "application/json", schema  = @Schema(implementation = VehicleDTO.class))}),
             @ApiResponse(responseCode = "500", description = "Error buscando vehiculos", content = @Content),
             @ApiResponse(responseCode = "400", description = "Parametro invalido", content = @Content),
             @ApiResponse(responseCode = "404", description = "Vehiculo no encontrado", content = @Content),
@@ -79,7 +79,7 @@ public class VehicleSampleController {
     @GetMapping(value = "/{id}",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<VehicleSampleDTO> getbyId(
+    public ResponseEntity<VehicleDTO> getbyId(
             @Parameter(description = "ID del vehiculo", name = "id", required = true) @PathVariable("id") Long id) {
 
         logger.info(String.format( "Services getby Id %s",  id));
@@ -89,7 +89,7 @@ public class VehicleSampleController {
         }
 
         HttpStatus code;
-        VehicleSampleDTO output = null;
+        VehicleDTO output = null;
 
         try{
             output = vehicleService.getVehicleSamples(id);
@@ -108,27 +108,27 @@ public class VehicleSampleController {
 
     @Operation(summary = "Crear Vehiculo")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Vehiculo creado", content = {@Content(mediaType =  "application/json", schema  = @Schema(implementation = VehicleSampleDTO.class))}),
+            @ApiResponse(responseCode = "201", description = "Vehiculo creado", content = {@Content(mediaType =  "application/json", schema  = @Schema(implementation = VehicleDTO.class))}),
             @ApiResponse(responseCode = "500", description = "Error creando vehiculos", content = @Content),
             @ApiResponse(responseCode = "400", description = "Parametro invalido", content = @Content),
     })
     @PostMapping(value = "/",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<VehicleSampleDTO> create(
-            @Parameter(description = "Datos del vehiculo", name = "vehicleSampleDTO", required = true) @Valid @RequestBody  VehicleSampleDTO vehicleSampleDTO) {
+    public ResponseEntity<VehicleDTO> create(
+            @Parameter(description = "Datos del vehiculo", name = "vehicleSampleDTO", required = true) @Valid @RequestBody VehicleDTO vehicleDTO) {
 
-        logger.info(String.format( "Services Create  %s",  vehicleSampleDTO));
-        if(vehicleSampleDTO == null){
+        logger.info(String.format( "Services Create  %s", vehicleDTO));
+        if(vehicleDTO == null){
             logger.info("Parametro erroneo");
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
 
         HttpStatus code;
-        VehicleSampleDTO output = null;
+        VehicleDTO output = null;
 
         try{
-            output = vehicleService.create(vehicleSampleDTO);
+            output = vehicleService.create(vehicleDTO);
             if(output == null) {
                 code = HttpStatus.INTERNAL_SERVER_ERROR;
                 logger.info("create vehicle internal error");
@@ -144,27 +144,27 @@ public class VehicleSampleController {
 
     @Operation(summary = "Actualizar Vehiculo")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Vehiculo actualizado", content = {@Content(mediaType =  "application/json", schema  = @Schema(implementation = VehicleSampleDTO.class))}),
+            @ApiResponse(responseCode = "200", description = "Vehiculo actualizado", content = {@Content(mediaType =  "application/json", schema  = @Schema(implementation = VehicleDTO.class))}),
             @ApiResponse(responseCode = "500", description = "Error guardando vehiculos", content = @Content),
             @ApiResponse(responseCode = "400", description = "Parametro invalido", content = @Content),
     })
     @PutMapping(value = "/",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<VehicleSampleDTO> update(
-            @Parameter(description = "Datos del vehiculo", name = "vehicleSampleDTO", required = true) @Valid @RequestBody  VehicleSampleDTO vehicleSampleDTO) {
+    public ResponseEntity<VehicleDTO> update(
+            @Parameter(description = "Datos del vehiculo", name = "vehicleSampleDTO", required = true) @Valid @RequestBody VehicleDTO vehicleDTO) {
 
-        logger.info(String.format( "Services Update  %s",  vehicleSampleDTO));
-        if(vehicleSampleDTO == null){
+        logger.info(String.format( "Services Update  %s", vehicleDTO));
+        if(vehicleDTO == null){
             logger.info("Parametro erroneo");
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
 
         HttpStatus code;
-        VehicleSampleDTO output = null;
+        VehicleDTO output = null;
 
         try{
-            output = vehicleService.update(vehicleSampleDTO);
+            output = vehicleService.update(vehicleDTO);
             if(output == null) {
                 code = HttpStatus.INTERNAL_SERVER_ERROR;
                 logger.info("create vehicle internal error");

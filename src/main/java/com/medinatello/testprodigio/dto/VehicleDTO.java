@@ -1,29 +1,25 @@
-package com.medinatello.testprodigio.entity;
+package com.medinatello.testprodigio.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.io.Serializable;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Calendar;
 
-@Entity(name = "Vehiclesample")
-@JsonIgnoreProperties(ignoreUnknown=true)
-public class VehicleSample implements Serializable{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@XmlRootElement(name = "vehiculo")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class VehicleDTO {
+
     private Long id;
+    @NotNull
+    private Integer countryId;
 
-
-    private Integer countyFips;
-    private String countyName;
-    private String stateName;
+    private String country;
+    private String state;
     private Calendar date;
-    private Integer countyVmt;
+    private Integer vmt;
     private Integer baselineJanVmt;
-    private Long percentChangeFromJan;
+    private Long percentJan;
     private Long mean7CountyVmt;
     private Long mean7PercentChangeFromJan;
     private Calendar dateAtLow;
@@ -38,28 +34,28 @@ public class VehicleSample implements Serializable{
         this.id = id;
     }
 
-    public Integer getCountyFips() {
-        return countyFips;
+    public Integer getCountryId() {
+        return countryId;
     }
 
-    public void setCountyFips(Integer countyFips) {
-        this.countyFips = countyFips;
+    public void setCountryId(Integer countryId) {
+        this.countryId = countryId;
     }
 
-    public String getCountyName() {
-        return countyName;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCountyName(String countyName) {
-        this.countyName = countyName;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public String getStateName() {
-        return stateName;
+    public String getState() {
+        return state;
     }
 
-    public void setStateName(String stateName) {
-        this.stateName = stateName;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public Calendar getDate() {
@@ -70,12 +66,12 @@ public class VehicleSample implements Serializable{
         this.date = date;
     }
 
-    public Integer getCountyVmt() {
-        return countyVmt;
+    public Integer getVmt() {
+        return vmt;
     }
 
-    public void setCountyVmt(Integer countyVmt) {
-        this.countyVmt = countyVmt;
+    public void setVmt(Integer vmt) {
+        this.vmt = vmt;
     }
 
     public Integer getBaselineJanVmt() {
@@ -86,12 +82,12 @@ public class VehicleSample implements Serializable{
         this.baselineJanVmt = baselineJanVmt;
     }
 
-    public Long getPercentChangeFromJan() {
-        return percentChangeFromJan;
+    public Long getPercentJan() {
+        return percentJan;
     }
 
-    public void setPercentChangeFromJan(Long percentChangeFromJan) {
-        this.percentChangeFromJan = percentChangeFromJan;
+    public void setPercentJan(Long percentJan) {
+        this.percentJan = percentJan;
     }
 
     public Long getMean7CountyVmt() {

@@ -1,6 +1,6 @@
 package com.medinatello.testprodigio.dao;
 
-import com.medinatello.testprodigio.entity.VehicleSample;
+import com.medinatello.testprodigio.entity.Vehicle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,17 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class VehicleSampleRepo {
+public class VehicleRepo {
 
     @Autowired
-    private IVehicleSampleDAO vehicleSample;
+    private IVehicleDAO vehicleDao;
 
-    private Logger logger = LoggerFactory.getLogger(VehicleSampleRepo.class);
+    private Logger logger = LoggerFactory.getLogger(VehicleRepo.class);
 
-    public List<VehicleSample> getAll() {
-        List<VehicleSample>  output = new ArrayList<>();
+    public List<Vehicle> getAll() {
+        List<Vehicle>  output = new ArrayList<>();
         try{
-            var dao = vehicleSample.findAll();
+            var dao = vehicleDao.findAll();
             dao.forEach(output::add);
         }catch (Exception e){
             output = null;
@@ -30,10 +30,10 @@ public class VehicleSampleRepo {
         return  output;
     }
 
-    public List<VehicleSample> getAll(String country) {
-        List<VehicleSample>  output = new ArrayList<>();
+    public List<Vehicle> getAll(String country) {
+        List<Vehicle>  output = new ArrayList<>();
         try{
-            var dao = vehicleSample.findByCountry(country);
+            var dao = vehicleDao.findByCountry(country);
             dao.forEach(output::add);
         }catch (Exception e){
             output = null;
@@ -43,10 +43,10 @@ public class VehicleSampleRepo {
         return  output;
     }
 
-    public VehicleSample getById(Long id) {
-        var output = new VehicleSample();
+    public Vehicle getById(Long id) {
+        var output = new Vehicle();
         try{
-            var dao = vehicleSample.findById(id);
+            var dao = vehicleDao.findById(id);
             if(!dao.isPresent()){
                 return null;
             }
@@ -59,22 +59,22 @@ public class VehicleSampleRepo {
         return  output;
     }
 
-    public VehicleSample update(VehicleSample value){
-        VehicleSample output = null;
+    public Vehicle update(Vehicle value){
+        Vehicle output = null;
         Boolean isNew = value.getId() == null || value.getId() == 0;
         try{
-            output = vehicleSample.save(value);
+            output = vehicleDao.save(value);
         }catch (Exception e){
             logger.error(String.format("Error %s tabla vehicleSample", isNew?"creando":"actualizando"), e);
         }
         return output;
     }
 
-    public Boolean delete(VehicleSample value){
+    public Boolean delete(Vehicle value){
 
         Boolean output;
         try{
-            vehicleSample.delete(value);
+            vehicleDao.delete(value);
             output = true;
         }catch (Exception e){
             output = false;
